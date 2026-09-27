@@ -1,0 +1,129 @@
+### ========================================
+### 工业自动化模型 API 测试
+### 中转地址: http://124.222.143.34:3000
+### ========================================
+
+### 测试1：Qwen3.7-Flash（快速聊天）
+GET http://124.222.143.34:3000/v1/models
+Authorization: Bearer sk-pGy62vgIJYaQ8LwxiBdYm3uT9Z98h8xpqLCVlOZcZQchtOtx
+Content-Type: application/json
+
+### 测试2：聊天接口 - qwen3.7-flash
+POST http://124.222.143.34:3000/v1/chat/completions
+Authorization: Bearer sk-pGy62vgIJYaQ8LwxiBdYm3uT9Z98h8xpqLCVlOZcZQchtOtx
+Content-Type: application/json
+
+{
+  "model": "qwen3.7-flash",
+  "messages": [
+    {"role": "user", "content": "用一句话解释PLC是什么"}
+  ],
+  "max_tokens": 100
+}
+
+### 测试3：DeepSeek-V4-Flash
+POST http://124.222.143.34:3000/v1/chat/completions
+Authorization: Bearer sk-pGy62vgIJYaQ8LwxiBdYm3uT9Z98h8xpqLCVlOZcZQchtOtx
+Content-Type: application/json
+
+{
+  "model": "deepseek-v4-flash",
+  "messages": [
+    {"role": "user", "content": "PLC中Modbus TCP和Modbus RTU的区别是什么？"}
+  ],
+  "max_tokens": 300
+}
+
+### 测试4：Kimi-K2.7-Code（代码专用）
+POST http://124.222.143.34:3000/v1/chat/completions
+Authorization: Bearer sk-pGy62vgIJYaQ8LwxiBdYm3uT9Z98h8xpqLCVlOZcZQchtOtx
+Content-Type: application/json
+
+{
+  "model": "kimi-k2.7-code-highspeed",
+  "messages": [
+    {"role": "user", "content": "用Python写一个Modbus TCP读取寄存器的函数"}
+  ],
+  "max_tokens": 500
+}
+
+### 测试5：Claude-Opus（如果可用）
+POST http://124.222.143.34:3000/v1/chat/completions
+Authorization: Bearer sk-pGy62vgIJYaQ8LwxiBdYm3uT9Z98h8xpqLCVlOZcZQchtOtx
+Content-Type: application/json
+
+{
+  "model": "claude-opus-4.6",
+  "messages": [
+    {"role": "user", "content": "解释一下PID控制的原理"}
+  ],
+  "max_tokens": 300
+}
+
+### 测试6：免费模型 nvidia nemotron
+POST http://124.222.143.34:3000/v1/chat/completions
+Authorization: Bearer sk-pGy62vgIJYaQ8LwxiBdYm3uT9Z98h8xpqLCVlOZcZQchtOtx
+Content-Type: application/json
+
+{
+  "model": "nvidia/nemotron-3.5-lightning:free",
+  "messages": [
+    {"role": "user", "content": "PLC急停回路如何设计？"}
+  ],
+  "max_tokens": 300
+}
+
+### 测试7：MiniMax 高速版
+POST http://124.222.143.34:3000/v1/chat/completions
+Authorization: Bearer sk-pGy62vgIJYaQ8LwxiBdYm3uT9Z98h8xpqLCVlOZcZQchtOtx
+Content-Type: application/json
+
+{
+  "model": "MiniMax-M2.7-highspeed",
+  "messages": [
+    {"role": "user", "content": "SCADA系统的主要功能有哪些？"}
+  ],
+  "max_tokens": 300
+}
+
+### 测试8：GLM-4.7-Flash（智谱）
+POST http://124.222.143.34:3000/v1/chat/completions
+Authorization: Bearer sk-pGy62vgIJYaQ8LwxiBdYm3uT9Z98h8xpqLCVlOZcZQchtOtx
+Content-Type: application/json
+
+{
+  "model": "ZhipuAI/GLM-4.7-Flash",
+  "messages": [
+    {"role": "user", "content": "工业机器人与PLC通信的方式有哪些？"}
+  ],
+  "max_tokens": 300
+}
+
+### ========================================
+### 本地模型（Ollama 服务器）
+### 地址: http://192.168.1.100:8081
+### ========================================
+
+### 测试9：本地 Qwen2.5-1.5B（Ollama）
+POST http://192.168.1.100:8081/v1/chat/completions
+Content-Type: application/json
+
+{
+  "messages": [
+    {"role": "system", "content": "你是一个PLC编程助手，用中文回答。"},
+    {"role": "user", "content": "用一句话解释PLC是什么"}
+  ],
+  "max_tokens": 100
+}
+
+### 测试10：本地模型 - 直接用模型名
+POST http://192.168.1.100:8081/v1/chat/completions
+Content-Type: application/json
+
+{
+  "model": "/root/models/Qwen2.5-1.5B-Instruct-Q4_K_M.gguf",
+  "messages": [
+    {"role": "user", "content": "你好"}
+  ],
+  "max_tokens": 200
+}
